@@ -6,23 +6,23 @@
 /*   By: ashabdan <ashabdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 13:42:03 by ashabdan          #+#    #+#             */
-/*   Updated: 2020/10/04 23:55:01 by ashabdan         ###   ########.fr       */
+/*   Updated: 2020/10/06 01:22:40 by ashabdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char		*remexd(char *original, char *additional)
+static char		*remexd(char **original, char *additional)
 {
 	char	*tmp_rem;
 
-	if (original == NULL || additional == NULL)
+	if (original == NULL || *original == NULL || additional == NULL)
 		return (NULL);
-	tmp_rem = ft_strjoin(original, additional);
-	free(original);
-	original = tmp_rem;
+	tmp_rem = ft_strjoin(*original, additional);
+	free(*original);
+	*original = tmp_rem;
 	tmp_rem = NULL;
-	return (original);
+	return (*original);
 }
 
 static t_list	*remaining(int fd)
@@ -57,7 +57,7 @@ static char		*isnewline(char *nl, char **rem)
 	}
 	ret = ft_strdup(*rem);
 	free(*rem);
-	*rem = (nl != NULL) ? tmp_rem : "";
+	*rem = (nl != NULL) ? tmp_rem : ft_strdup("");
 	return (ret);
 }
 
@@ -76,7 +76,7 @@ int				get_next_line(int fd, char **line)
 	{
 		if ((read_bytes = read(fd, buf, BUFF_SIZE)) <= 0)
 			break ;
-		rem->content = remexd(rem->content, buf);
+		rem->content = remexd((char **)&(rem->content), buf);
 		ft_bzero(buf, BUFF_SIZE);
 	}
 	*line = isnewline(nl, (char **)&(rem->content));

@@ -6,12 +6,12 @@
 /*   By: ashabdan <ashabdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 15:41:58 by ashabdan          #+#    #+#             */
-/*   Updated: 2020/10/04 23:48:58 by ashabdan         ###   ########.fr       */
+/*   Updated: 2020/10/06 01:16:52 by ashabdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LST_BONUS_H
-# define FT_LST_BONUS_H
+#ifndef FT_LST_H
+# define FT_LST_H
 # include <stdlib.h>
 
 typedef struct		s_list
